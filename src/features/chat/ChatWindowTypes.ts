@@ -24,16 +24,17 @@ export type ChatWindowProps = {
   onChatCreated: (newChatId: string) => void;
 };
 
+export type UsernameImageMap = {
+  username: string;
+  image: string;
+};
+
 export type HeaderProps = {
   chatRoom: Chat;
   pinnedMessages: PinnedMessage[];
   onDiscardPin?: (messageId: number) => void;
   onOpenPinnedMenu?: () => void;
-};
-
-export type UsernameImageMap = {
-  username: string;
-  image: string;
+  imageUrls: UsernameImageMap[];
 };
 
 export type MessageProps = {
