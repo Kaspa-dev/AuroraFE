@@ -37,6 +37,11 @@ export async function encryptMessage(chatId: string, content: string): Promise<s
 }
 
 export async function decryptMessage(chatId: string, ciphertext: string): Promise<string> {
+  // handles empty messages (for file-only sending)
+  if (!ciphertext || ciphertext.length === 0) {
+    return '';
+  }
+
   const senderKey = await getSenderKey(chatId);
   if (!senderKey) throw new Error('No sender key available for this chat');
 
