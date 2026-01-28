@@ -410,26 +410,6 @@ const ChatWindow = ({
       onChatCreated(newGroup.id);
       await storeDeviceIdentityKeyPair(currentUserId);
       await createGeneralSharedSecretForMessages(groupId, currentUserId);
-
-      //Subscribe to new topic
-      if (client && client.connected) {
-        client.subscribe(`/topic/chat.${groupId}`, (message: IMessage) => {
-          const received = JSON.parse(message.body) as ChatMessage;
-          const converted: Message = {
-            id: received.id,
-            user: { id: received.senderId, username: received.username },
-            content: received.content,
-            date: new Date(received.createdAt),
-            fk_chatId: received.groupId,
-            fileAttachments: received.fileAttachments,
-          };
-
-          setMessages(prev => {
-            if (prev.some(m => m.id === converted.id)) return prev;
-            return [...prev, converted];
-          });
-        });
-      }
     }
 
     //Send the message (works for both: new + existing chats)
