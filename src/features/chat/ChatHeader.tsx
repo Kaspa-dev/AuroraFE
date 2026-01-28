@@ -43,6 +43,7 @@ const ChatHeader = ({
   onDiscardPin,
   onOpenPinnedMenu,
   onOpenSidebar,
+  imageUrls,
 }: HeaderProps & { onOpenSidebar?: () => void }) => {
   const [pinAnchor, setPinAnchor] = useState<HTMLElement | null>(null);
   const [pinMenuMaxHeight, setPinMenuMaxHeight] = useState<number | null>(null);
@@ -139,7 +140,10 @@ const ChatHeader = ({
               <Box key={pin.message.id} sx={pinnedItemSx}>
                 <Box
                   component="img"
-                  src={pin.message.user.image || avatar}
+                  src={
+                    imageUrls.find(obj => obj.username === pin.message.user.username)?.image ||
+                    avatar
+                  }
                   alt={pin.message.user.username}
                   sx={pinnedAvatarSx}
                 />

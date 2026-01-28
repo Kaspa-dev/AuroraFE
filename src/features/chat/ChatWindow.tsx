@@ -478,6 +478,7 @@ const ChatWindow = ({
               pinnedMessages={pinnedMessages}
               onDiscardPin={discardPin}
               onOpenSidebar={onOpenSidebar}
+              imageUrls={members.map(obj => ({ username: obj.username, image: obj.url }))}
             />
           </Box>
 
